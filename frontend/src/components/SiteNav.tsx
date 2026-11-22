@@ -28,6 +28,9 @@ export function SiteNav() {
         <nav aria-label="Primary">
           <ul className="nav-links">
             <li>
+              <a href="#reel">{t.nav.work}</a>
+            </li>
+            <li>
               <a href="#product">{t.nav.product}</a>
             </li>
             <li>

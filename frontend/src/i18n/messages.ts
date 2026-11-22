@@ -8,6 +8,7 @@ export type Messages = {
   metaTitle: string;
   metaDescription: string;
   nav: {
+    work: string;
     product: string;
     difference: string;
     options: string;
@@ -26,6 +27,11 @@ export type Messages = {
     assurances: { label: string; href: string }[];
   };
   proof: { label: string; body: string }[];
+  reel: {
+    kicker: string;
+    title: string;
+    items: { image: string; alt: string; title: string; body: string }[];
+  };
   steps: {
     kicker: string;
     title: string;
@@ -111,6 +117,7 @@ export const messages: Record<Locale, Messages> = {
     metaDescription:
       "ClearBison runs authorized security scans on code you own or systems you control, then hands you findings you can fix. I quote after a short call. No public price list.",
     nav: {
+      work: "Work",
       product: "Product",
       difference: "Difference",
       options: "Options",
@@ -138,6 +145,30 @@ export const messages: Record<Locale, Messages> = {
       { label: "Patchable", body: "File, line, and a next step — not a severity dump." },
       { label: "Private", body: "Your code and findings stay inside the job." },
     ],
+    reel: {
+      kicker: "The work",
+      title: "Look at the job. Then decide.",
+      items: [
+        {
+          title: "On your machine",
+          body: "Local passes read a directory you own. They do not call a model, and they do not change your files.",
+          image: "/reel-local.jpg",
+          alt: "Laptop on a metal desk showing a dark findings panel",
+        },
+        {
+          title: "One mark",
+          body: "The work stays with me. Your code and findings are treated as confidential from the first message.",
+          image: "/reel-mark.jpg",
+          alt: "Close view of the ClearBison metal mark",
+        },
+        {
+          title: "A report you can use",
+          body: "Rows and a next step. Not a certificate of safety, and not a wall of noise.",
+          image: "/reel-report.jpg",
+          alt: "Tablet on a metal table showing an abstract findings report",
+        },
+      ],
+    },
     steps: {
       kicker: "Path",
       title: "Three moves. Then a report you can use.",
@@ -330,6 +361,7 @@ export const messages: Record<Locale, Messages> = {
     metaDescription:
       "ClearBison ejecuta escaneos de seguridad autorizados sobre código o sistemas que controlas, y te entrega hallazgos que puedes corregir. Cotizo después de una llamada corta. Sin lista de precios pública.",
     nav: {
+      work: "Trabajo",
       product: "Producto",
       difference: "Diferencia",
       options: "Opciones",
@@ -357,6 +389,30 @@ export const messages: Record<Locale, Messages> = {
       { label: "Parcheable", body: "Archivo, línea y un siguiente paso — no un volcado de severidad." },
       { label: "Privado", body: "Tu código y tus hallazgos se quedan dentro del trabajo." },
     ],
+    reel: {
+      kicker: "El trabajo",
+      title: "Mira el trabajo. Luego decide.",
+      items: [
+        {
+          title: "En tu máquina",
+          body: "Los pases locales leen un directorio tuyo. No llaman a un modelo y no cambian tus archivos.",
+          image: "/reel-local.jpg",
+          alt: "Portátil sobre un escritorio de metal con un panel oscuro de hallazgos",
+        },
+        {
+          title: "Una marca",
+          body: "El trabajo se queda conmigo. Tu código y tus hallazgos se tratan como confidenciales desde el primer mensaje.",
+          image: "/reel-mark.jpg",
+          alt: "Detalle del emblema metálico de ClearBison",
+        },
+        {
+          title: "Un reporte que puedes usar",
+          body: "Filas y un siguiente paso. No un certificado de seguridad, ni una pared de ruido.",
+          image: "/reel-report.jpg",
+          alt: "Tableta sobre una mesa de metal con un reporte abstracto de hallazgos",
+        },
+      ],
+    },
     steps: {
       kicker: "Camino",
       title: "Tres movimientos. Luego un reporte que puedes usar.",

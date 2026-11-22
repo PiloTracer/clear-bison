@@ -69,6 +69,26 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section id="reel" className="reel" aria-labelledby="reel-title">
+        <div className="shell">
+          <span className="section-kicker">{t.reel.kicker}</span>
+          <h2 className="section-title" id="reel-title">
+            {t.reel.title}
+          </h2>
+          <div className="reel__grid">
+            {t.reel.items.map((item) => (
+              <figure className="reel__card" key={item.image}>
+                <img src={item.image} alt={item.alt} />
+                <figcaption>
+                  <strong>{item.title}</strong>
+                  <p>{item.body}</p>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section id="path" aria-labelledby="path-title">
         <div className="shell">
           <span className="section-kicker">{t.steps.kicker}</span>

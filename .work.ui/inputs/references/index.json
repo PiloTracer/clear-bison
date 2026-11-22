@@ -1,6 +1,6 @@
 {
   "schema": "ui-reference-index/1.0",
-  "updated_at": "2026-11-22T20:58:59+00:00",
+  "updated_at": "2026-11-22T21:11:15+00:00",
   "references": [
     {
       "slug": "aikido",
@@ -28,6 +28,32 @@
           "lead-generation: sales CTA: book a demo",
           "saas-product: SaaS CTA/product language: start for free, platform, software",
           "saas-product: JSON-LD SoftwareApplication"
+        ]
+      }
+    },
+    {
+      "slug": "asseenontv",
+      "requested_url": "https://asseenontv.pro/",
+      "final_url": "https://asseenontv.pro/",
+      "status": "ok",
+      "fetched_at": "2026-11-22T21:11:15+00:00",
+      "title": "As Seen On TV Companies | Television Website | As Seen On Television",
+      "http_status": 200,
+      "palette_size": 75,
+      "classification": {
+        "taxonomy_version": "2026-11-05",
+        "primary_type": "nonprofit-donation",
+        "types": [
+          "nonprofit-donation",
+          "comparison-marketplace"
+        ],
+        "conversion_goal": "affiliate-referral",
+        "secondary_goals": [],
+        "funnel_stage": "decision",
+        "confidence": "medium",
+        "reasons": [
+          "comparison-marketplace: comparison language: offers",
+          "nonprofit-donation: giving language: mission"
         ]
       }
     },
