@@ -1,0 +1,141 @@
+
+## Identity
+when_utc               2026-11-22T22:50:29Z
+hostname               pop-os
+user                   admin
+repo                   /mnt/work/Projects/ClearBison
+git                    9069e2a
+domain                 clearbison.com
+origin_claimed         169.58.4.85
+
+## This host vs origin
+uname                  Linux 7.1.1-76070101-generic x86_64
+addr                   lo               UNKNOWN        127.0.0.1/8 
+addr                   enp7s0           UP             10.47.181.162/18 
+addr                   wlp8s0           UP             192.168.101.27/24 
+addr                   br-0f519af347d4  DOWN           172.31.0.1/24 
+addr                   br-5c574c017916  DOWN           172.21.0.1/16 
+addr                   docker0          DOWN           172.17.0.1/16 
+addr                   br-a269d01b9f5b  DOWN           172.24.0.1/16 
+addr                   br-d3aec8d3a95c  UP             172.20.0.1/16 
+addr                   br-758270ecb285  DOWN           172.28.0.1/16 
+addr                   br-764969d7c487  DOWN           172.30.0.1/16 
+addr                   br-acc3912a0419  UP             192.168.16.1/20 
+addr                   br-cdac114d179d  UP             172.19.0.1/16 
+addr                   br-aa7583213def  DOWN           172.27.0.1/16 
+addr                   br-5de9f09cc928  DOWN           172.22.0.1/16 
+addr                   br-730e75b90a63  DOWN           172.25.0.1/16 
+addr                   br-e7e25414b33b  DOWN           172.26.0.1/16 
+addr                   br-148df6ce7487  UP             192.168.0.1/20 
+addr                   br-c33061da2e7d  UP             192.168.32.1/20 
+addr                   br-09d38e064d47  DOWN           172.18.0.1/16 
+addr                   br-ee209f13e2b1  UP             172.23.0.1/16 
+addr                   br-cfeff97a688e  UP             172.29.0.1/16 
+origin_on_this_host    no
+public_ip_seen         unreachable
+public_ip_matches      no
+
+## DNS
+A clearbison.com       none
+AAAA clearbison.com    none
+CNAME clearbison.com   none
+A_is_origin clearbison.com no
+A www.clearbison.com   none
+AAAA www.clearbison.com none
+CNAME www.clearbison.com none
+A_is_origin www.clearbison.com no
+NS                     kai.ns.cloudflare.com. zainab.ns.cloudflare.com.
+ns_cloudflare          yes
+MX                     none
+
+## HTTP
+https://clearbison.com/ no-response
+https://www.clearbison.com/ no-response
+http://169.58.4.85/    code=404 server=nginx/1.28.3 cf-ray=no location=
+https://169.58.4.85/   code=405 server=nginx/1.28.3 cf-ray=no location=
+
+## TLS
+cert                   none
+
+## Listeners on this host
+listen                 127.0.0.1:8400
+listen                 127.0.0.1:8085
+listen                 127.0.0.1:631
+listen                 127.0.0.1:3400
+listen                 127.0.0.1:28279
+listen                 0.0.0.0:80
+listen                 0.0.0.0:443
+listen                 127.0.0.1:18000
+listen                 127.0.0.1:18001
+listen                 127.0.0.1:18002
+listen                 0.0.0.0:7070
+listen                 127.0.0.1:18765
+listen                 127.0.0.1:46225
+listen                 127.0.0.1:45899
+listen                 0.0.0.0:60921
+listen                 127.0.0.1:47804
+listen                 127.0.0.1:42007
+listen                 127.0.0.1:41232
+listen                 127.0.0.1:41231
+listen                 127.0.0.1:44075
+listen                 127.0.0.1:43567
+listen                 127.0.0.1:40517
+listen                 127.0.0.1:34223
+listen                 127.0.0.1:33177
+listen                 127.0.0.1:35907
+listen                 127.0.0.1:36595
+listen                 127.0.0.1:36779
+listen                 127.0.0.1:61954
+listen                 0.0.0.0:45011
+listen                 127.0.0.1:58080
+listen                 127.0.0.1:58000
+listen                 0.0.0.0:33187
+listen                 127.0.0.1:54566
+listen                 127.0.0.1:56379
+listen                 127.0.0.53%lo:53
+listen                 0.0.0.0:36069
+listen                 127.0.0.1:55433
+listen                 127.0.0.1:53000
+listen                 *:11434
+listen                 [::]:80
+
+## Edge software
+nginx                  /usr/sbin/nginx
+caddy                  /snap/bin/caddy
+certbot                absent
+cloudflared            absent
+docker                 /usr/bin/docker
+docker_version         29.10.0
+compose                5.7.1
+
+## Production env keys
+env_file               .env.prd exists=True
+COMPOSE_PROJECT_NAME   clearbison-prd-a5ee81
+APP_ENV                prd
+PUBLIC_HOST            logicbison.com
+BIND_ADDRESS           0.0.0.0
+API_PORT               36309
+WEB_PORT               35561
+NEXT_PUBLIC_API_BASE   empty
+CORS_ORIGINS           *
+CONTACT_INBOX          set
+SMTP_HOST              mail.iterwire.com
+SMTP_PORT              465
+SMTP_USER              set
+SMTP_PASS              set
+
+## Compose prd
+project                clearbison-prd-a5ee81
+ps                     api Up About an hour
+ps                     web Up About an hour
+
+## Disk
+disk                   Filesystem      Size  Used Avail Use% Mounted on
+disk                   /dev/nvme1n1p3  639G  567G   40G  94% /
+
+## Read this as
+Public site should be https://clearbison.com (Cloudflare terminates TLS when the NS is Cloudflare and the A record is proxied).
+Origin 169.58.4.85 should only expose 80 and 443 to Cloudflare. The app itself listens on API_PORT and WEB_PORT from .env.prd.
+Next.js rewrites /health and /api/* to the api container, so the browser only needs the web port.
+Do not publish SMTP_* or CONTACT_INBOX. An empty SMTP_PASS means the contact form returns 503.
+If origin_on_this_host is no, run this script again on 169.58.4.85 before changing DNS.
