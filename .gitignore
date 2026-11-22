@@ -38,3 +38,5 @@ backups/
 
 # Docker volume noise
 *.pid
+
+**/.work/deploy

@@ -25,7 +25,6 @@ services:
       dockerfile: Dockerfile.prd
       args:
         NEXT_PUBLIC_API_BASE: ${NEXT_PUBLIC_API_BASE:-}
-      API_INTERNAL_URL: http://api:8000
     # No env_file: contact/SMTP secrets stay on the api service only.
     environment:
       NODE_ENV: production

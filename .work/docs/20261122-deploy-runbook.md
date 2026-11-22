@@ -1,35 +1,72 @@
 # Production deploy — clearbison.com
 
-**What this is:** The order of checks before ClearBison is served at `https://clearbison.com` from origin `169.58.4.85`.
+**What this is:** The exact order to publish ClearBison from `169.58.4.85` through Cloudflare.
 **Status:** Draft · 2026-11-22
-**Needs:** Run `./bin/deploy-discover.sh` on `169.58.4.85`, then create the Cloudflare A record. This laptop is not that host.
+**Needs:** Create `.env.prd`, proxy nginx to the web port, then add the Cloudflare A record.
 
-Facts below are from `.work/docs/20261122-deploy-discover.txt` (measured).
+Measured on `vmi3435240` at `/srv/clear-bison` (`git 2665004`, 2026-11-22T22:53:34Z): this host **is** the origin. Nameservers are Cloudflare. `clearbison.com` has **no A record**. nginx owns ports 80 and 443 and returns 404/405 for the bare IP. `.env.prd` does not exist. Host port `8000` is already taken. Disk is 8% used.
 
-## Blockers
+## 1. Stack, loopback only
 
-1. `clearbison.com` has Cloudflare nameservers (`kai.ns.cloudflare.com`, `zainab.ns.cloudflare.com`) and **no A record**. HTTPS to the name does not answer.
-2. This machine is not `169.58.4.85` (`origin_on_this_host: no`). Its prd stack is already up here on `WEB_PORT=35561` / `API_PORT=36309`.
-3. `169.58.4.85` answers with `nginx/1.28.3` (HTTP 404, HTTPS 405). Nothing for this site is on that vhost yet.
-4. `.env.prd` `PUBLIC_HOST` is `logicbison.com`, not `clearbison.com`.
+On the origin:
 
-## Order
+```bash
+cd /srv/clear-bison
+./bin/start.sh prd setup
+```
 
-Do these on the origin, not on this laptop.
+Edit `.env.prd` before `up`:
 
-1. Copy the repo to `169.58.4.85` at a fixed path. Do not copy `.env.dev`.
-2. `./bin/start.sh prd setup` only if `.env.prd` is missing. Then set `PUBLIC_HOST=clearbison.com`. Keep `SMTP_*` and `CONTACT_INBOX` filled. Leave `NEXT_PUBLIC_API_BASE` empty so the browser uses the same host.
-3. `./bin/start.sh prd up`. Confirm `curl -fsS http://127.0.0.1:$WEB_PORT/health` returns ok. The browser never needs `API_PORT`; Next rewrites `/health` and `/api/*`.
-4. On the origin nginx, one site for `clearbison.com` and `www.clearbison.com` proxies to `127.0.0.1:$WEB_PORT`. Listen on 80 only if Cloudflare is the TLS edge. Do not publish `API_PORT` or `35561` on the internet.
-5. In Cloudflare DNS: `A clearbison.com → 169.58.4.85` proxied (orange cloud), and `CNAME www → clearbison.com` proxied. SSL mode Full. Do not create the record until step 4 returns 200 on the origin.
-6. Re-run `./bin/deploy-discover.sh clearbison.com 169.58.4.85` on the origin. Pass means: `A_is_origin` or Cloudflare anycast plus `cf-ray=yes`, and `https://clearbison.com/` code 200.
+- `PUBLIC_HOST=clearbison.com`
+- `BIND_ADDRESS=127.0.0.1`
+- `NEXT_PUBLIC_API_BASE=` (empty)
+- `CONTACT_INBOX`, `SMTP_HOST=mail.iterwire.com`, `SMTP_PORT=465`, `SMTP_USER`, `SMTP_PASS` copied from the working dev env. Quote `SMTP_PASS` if it contains `$`.
+
+```bash
+./bin/start.sh prd up
+set -a && source .env.prd && set +a
+curl -fsS "http://127.0.0.1:${WEB_PORT}/health"
+```
+
+Pass: JSON `"status":"ok"`. Do not open `API_PORT` or `WEB_PORT` on `eth0`. The site rewrites `/health` and `/api/*` to the api container.
+
+## 2. nginx
+
+Add a site for `clearbison.com` and `www.clearbison.com` that proxies to `127.0.0.1:$WEB_PORT`. Leave the existing default site alone. Reload nginx only after `nginx -t` passes.
+
+Check from the origin:
+
+```bash
+curl -fsS -H 'Host: clearbison.com' http://127.0.0.1/health
+```
+
+## 3. Cloudflare
+
+Only after step 2 returns ok.
+
+| Record | Value | Proxy |
+|--------|--------|--------|
+| `A clearbison.com` | `169.58.4.85` | Proxied |
+| `CNAME www` | `clearbison.com` | Proxied |
+
+SSL/TLS mode: **Full**. Turn on **Always Use HTTPS**. Do not use Flexible (it fights an HTTPS redirect). Do not use Full (strict) until the origin presents a certificate for `clearbison.com`.
+
+## 4. Prove it
+
+On the origin:
+
+```bash
+./bin/deploy-discover.sh clearbison.com 169.58.4.85
+```
+
+Pass: `https://clearbison.com/` code 200 and `cf-ray=yes`. Then submit the contact form once.
 
 ## Do not
 
-- Point DNS at this laptop.
+- Bind the app on `0.0.0.0` or on host port `8000`.
 - Commit `.env.prd`.
-- Open SMTP or the random app ports in the firewall.
+- Create the DNS record before nginx returns 200 for `Host: clearbison.com`.
 
 ## Next action
 
-`ssh` to `169.58.4.85` and run `./bin/deploy-discover.sh clearbison.com 169.58.4.85`.
+`cd /srv/clear-bison && ./bin/start.sh prd setup`
