@@ -1,0 +1,59 @@
+{
+  "schema": "ui-reference-evidence/1.0",
+  "slug": "action1",
+  "generated_at": "2026-11-22T21:18:02+00:00",
+  "scan": {
+    "status": "blocked-http",
+    "method": "static-http",
+    "browser": false,
+    "javascript": false
+  },
+  "source": {
+    "requested_url": "https://www.action1.com",
+    "final_url": null,
+    "http_status": null,
+    "fetched_at": "2026-11-22T21:18:02+00:00",
+    "robots": {
+      "checked": true,
+      "allowed": true,
+      "url": "https://www.action1.com/robots.txt",
+      "reason": "no matching robots rule (allow)",
+      "http_status": 200,
+      "crawl_delay": null
+    },
+    "error": "HTTP 403 for https://www.action1.com/"
+  },
+  "page": {},
+  "styles": {
+    "sources": [],
+    "skipped": []
+  },
+  "palette": {
+    "entries": [],
+    "unique_colors": 0,
+    "method": "not scanned"
+  },
+  "classification": {
+    "taxonomy_version": "2026-11-05",
+    "primary_type": "unknown",
+    "types": [
+      "unknown"
+    ],
+    "conversion_goal": "unknown",
+    "secondary_goals": [],
+    "funnel_stage": "unknown",
+    "confidence": "low",
+    "reasons": [
+      "scan blocked"
+    ]
+  },
+  "limits": [
+    "Static HTML/CSS only: JavaScript-rendered DOM, computed style, hover/focus states, and animations are not observed.",
+    "CSS declaration frequency is not visual usage: unused framework/reset rules can dominate the palette.",
+    "CSS cascade/layers are not resolved; `<style>` blocks and linked stylesheets are analyzed independently.",
+    "Cross-origin iframes, shadow DOM, canvas/WebGL, video, and image contents are skipped.",
+    "Robots.txt is respected for the page fetch; no crawl, no forms, no auth, no paywall bypass.",
+    "No screenshot was taken and no browser was launched. Browser/vision tiers need explicit operator authorization.",
+    "No logos, images, fonts, icons, or page copy should be reused; this evidence supports principles, not assets."
+  ]
+}

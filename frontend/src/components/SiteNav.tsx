@@ -28,13 +28,10 @@ export function SiteNav() {
         <nav aria-label="Primary">
           <ul className="nav-links">
             <li>
-              <a href="#reel">{t.nav.work}</a>
+              <a href="#difference">{t.nav.difference}</a>
             </li>
             <li>
               <a href="#product">{t.nav.product}</a>
-            </li>
-            <li>
-              <a href="#difference">{t.nav.difference}</a>
             </li>
             <li>
               <a href="#options">{t.nav.options}</a>
@@ -43,7 +40,7 @@ export function SiteNav() {
               <a href="#trust">{t.nav.trust}</a>
             </li>
             <li>
-              <a href="#founding">{t.founding.kicker}</a>
+              <a href="#faq">{t.nav.faq}</a>
             </li>
             <li>
               <LanguageSwitch />

@@ -4,9 +4,11 @@
 
 | Slug | Type | Goal | Source | Fetched | Status | DNA | Notes |
 |---|---|---|---|---|---|---|---|
+| `action1` | unknown | unknown | [https://www.action1.com](https://www.action1.com) | 2026-11-22 | blocked-http | pending | HTTP 403 for https://www.action1.com/ |
 | `aikido` | saas-product, lead-generation | free-trial | [Aikido Security \| Secure everything you…](https://www.aikido.dev/) | 2026-11-22 | ok | [Draft](aikido/REFERENCE_DNA.md) | HTTP 200 |
 | `asseenontv` | nonprofit-donation, comparison-marketplace | affiliate-referral | [As Seen On TV Companies \| Television We…](https://asseenontv.pro/) | 2026-11-22 | ok | pending | HTTP 200 |
 | `intruder` | saas-product, lead-generation | free-trial | [Intruder \| Stop Breaches Before They St…](https://www.intruder.io/) | 2026-11-22 | ok | [Draft](intruder/REFERENCE_DNA.md) | HTTP 200 |
+| `qualys` | saas-product | contact-quote | [Vulnerability Scanning & VMDR for Effec…](https://www.qualys.com/apps/vulnerability-management-detection-response) | 2026-11-22 | ok | pending | HTTP 200 |
 | `tenable` | ecommerce, comparison-marketplace, saas-product | purchase | [Tenable One Vulnerability Management \| …](https://www.tenable.com/products/vulnerability-management) | 2026-11-22 | ok | [Draft](tenable/REFERENCE_DNA.md) | HTTP 200 |
 | `wiz` | comparison-marketplace, lead-generation, saas-product | demo-booking | [Wiz: AI Cybersecurity for All Your Clou…](https://www.wiz.io/) | 2026-11-22 | ok | [Draft](wiz/REFERENCE_DNA.md) | HTTP 200 |
 
