@@ -1,0 +1,33 @@
+# ClearBison — production stack (./bin/start.sh prd)
+# Env vars come only from root .env.prd via --env-file.
+services:
+  api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.prd
+    env_file: .env.prd
+    environment:
+      APP_ENV: ${APP_ENV:-prd}
+      PUBLIC_HOST: ${PUBLIC_HOST:-logicbison.com}
+      CONTACT_INBOX: ${CONTACT_INBOX:-hello@clearbison.com}
+      CORS_ORIGINS: ${CORS_ORIGINS:-*}
+    ports:
+      - "${BIND_ADDRESS:-0.0.0.0}:${API_PORT}:8000"
+    restart: unless-stopped
+
+  web:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.prd
+      args:
+        NEXT_PUBLIC_API_BASE: ${NEXT_PUBLIC_API_BASE:-}
+      API_INTERNAL_URL: http://api:8000
+    env_file: .env.prd
+    environment:
+      NODE_ENV: production
+      NEXT_PUBLIC_API_BASE: ${NEXT_PUBLIC_API_BASE:-}
+    ports:
+      - "${BIND_ADDRESS:-0.0.0.0}:${WEB_PORT}:3000"
+    depends_on:
+      - api
+    restart: unless-stopped

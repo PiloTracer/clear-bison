@@ -1,0 +1,40 @@
+# ClearBison — development stack (./bin/start.sh dev)
+# Env vars come only from root .env.dev via --env-file.
+services:
+  api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.dev
+    env_file: .env.dev
+    environment:
+      APP_ENV: ${APP_ENV:-dev}
+      PUBLIC_HOST: ${PUBLIC_HOST:-logicbison.com}
+      CONTACT_INBOX: ${CONTACT_INBOX:-hello@clearbison.com}
+      CORS_ORIGINS: ${CORS_ORIGINS:-*}
+    ports:
+      - "${BIND_ADDRESS:-0.0.0.0}:${API_PORT}:8000"
+    volumes:
+      - ./backend/src:/app/src
+    restart: unless-stopped
+
+  web:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    env_file: .env.dev
+    environment:
+      NODE_ENV: development
+      WATCHPACK_POLLING: "true"
+      NEXT_PUBLIC_API_BASE: ${NEXT_PUBLIC_API_BASE:-}
+      API_INTERNAL_URL: http://api:8000
+    ports:
+      - "${BIND_ADDRESS:-0.0.0.0}:${WEB_PORT}:3000"
+    volumes:
+      - ./frontend:/app
+      - clearbison_web_node_modules_dev:/app/node_modules
+    depends_on:
+      - api
+    restart: unless-stopped
+
+volumes:
+  clearbison_web_node_modules_dev:

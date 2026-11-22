@@ -1,0 +1,38 @@
+# Secrets / local env (root-only .env* — keep examples)
+.env
+.env.dev
+.env.prd
+.env.*.local
+!.env.example
+
+# Node
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+npm-debug.log*
+yarn-error.log*
+
+# Python
+backend/.venv/
+backend/**/__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# Runtime / backups / tmp
+.tmp/
+tmp/
+backups/
+.run/
+*.log
+
+# Docker volume noise
+*.pid
