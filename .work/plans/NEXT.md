@@ -7,13 +7,13 @@
 | Item | Where |
 |------|-------|
 | Landing + API + compose | `frontend/`, `backend/`, `bin/start.sh` |
-| SMTP + i18n + polish + trust copy | committed (`CB-1`) |
+| Iterwire contact login | private `.env.*` (not committed) |
+| Findings board replaces `#reel` | uncommitted `frontend/` |
 
 ## Recommended next
 
 | P | Item |
 |---|------|
-| **0** | Owner: fill SMTP + contact inbox in `.env.*` |
-| **1** | `@ui-accessibility-audit` / live visual check |
-| **2** | `./bin/start.sh prd setup && ./bin/start.sh prd up` smoke |
-| **3** | Wire CRM/calendar when owner confirms |
+| **0** | Commit the uncommitted site (`whole-tree`) if it should ship |
+| **1** | `@ui-accessibility-audit` |
+| **2** | `./bin/start.sh prd` smoke after the site commit |
