@@ -46,7 +46,7 @@ export function SiteNav() {
               <LanguageSwitch />
             </li>
             <li>
-              <a className="btn btn-primary" href="#founding">
+              <a className="btn btn-primary" href="#contact">
                 {t.nav.talk}
               </a>
             </li>

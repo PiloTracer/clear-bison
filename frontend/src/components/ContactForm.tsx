@@ -1,10 +1,88 @@
 "use client";
 
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useEffect, useId, useRef, useState } from "react";
 import { useLocale } from "@/i18n/LocaleProvider";
 import { isOptionId, type OptionId } from "@/i18n/messages";
 
 type Status = "idle" | "sending" | "ok" | "error";
+
+function OptionField({
+  label,
+  blank,
+  labels,
+  value,
+  onChange,
+}: {
+  label: string;
+  blank: string;
+  labels: Record<string, string>;
+  value: OptionId | "";
+  onChange: (value: OptionId | "") => void;
+}) {
+  const listId = useId();
+  const rootRef = useRef<HTMLDivElement>(null);
+  const [open, setOpen] = useState(false);
+  const choices: { id: OptionId | ""; text: string }[] = [
+    { id: "", text: blank },
+    ...(Object.keys(labels) as OptionId[]).map((id) => ({ id, text: labels[id] })),
+  ];
+  const current = choices.find((c) => c.id === value)?.text ?? blank;
+
+  useEffect(() => {
+    if (!open) return;
+    const onDoc = (e: MouseEvent) => {
+      if (!rootRef.current?.contains(e.target as Node)) setOpen(false);
+    };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("mousedown", onDoc);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousedown", onDoc);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [open]);
+
+  return (
+    <div className="option-field" ref={rootRef}>
+      <span className="option-field__label" id={`${listId}-label`}>
+        {label}
+      </span>
+      <input type="hidden" name="option" value={value} />
+      <button
+        type="button"
+        className="option-field__btn"
+        aria-haspopup="listbox"
+        aria-expanded={open}
+        aria-labelledby={`${listId}-label`}
+        onClick={() => setOpen((v) => !v)}
+      >
+        {current}
+      </button>
+      {open ? (
+        <ul className="option-field__list" role="listbox" id={listId} aria-labelledby={`${listId}-label`}>
+          {choices.map((choice) => (
+            <li key={choice.id || "blank"} role="presentation">
+              <button
+                type="button"
+                role="option"
+                aria-selected={choice.id === value}
+                className={`option-field__item${choice.id === value ? " is-selected" : ""}`}
+                onClick={() => {
+                  onChange(choice.id);
+                  setOpen(false);
+                }}
+              >
+                {choice.text}
+              </button>
+            </li>
+          ))}
+        </ul>
+      ) : null}
+    </div>
+  );
+}
 
 function readOptionFromUrl(): OptionId | "" {
   if (typeof window === "undefined") return "";
@@ -96,30 +174,20 @@ export function ContactForm() {
           <input name="email" type="email" required autoComplete="email" />
         </label>
       </div>
-      <label>
-        {t.contact.option}
-        <select
-          name="option"
-          value={option}
-          onChange={(e) => {
-            const next = e.target.value;
-            const value = isOptionId(next) ? next : "";
-            setOption(value);
-            const url = new URL(window.location.href);
-            if (value) url.searchParams.set("option", value);
-            else url.searchParams.delete("option");
-            url.hash = "contact";
-            window.history.replaceState({}, "", `${url.pathname}${url.search}${url.hash}`);
-          }}
-        >
-          <option value="">{t.contact.optionBlank}</option>
-          {(Object.keys(t.contact.optionLabels) as OptionId[]).map((id) => (
-            <option key={id} value={id}>
-              {t.contact.optionLabels[id]}
-            </option>
-          ))}
-        </select>
-      </label>
+      <OptionField
+        label={t.contact.option}
+        blank={t.contact.optionBlank}
+        labels={t.contact.optionLabels}
+        value={option}
+        onChange={(value) => {
+          setOption(value);
+          const url = new URL(window.location.href);
+          if (value) url.searchParams.set("option", value);
+          else url.searchParams.delete("option");
+          url.hash = "contact";
+          window.history.replaceState({}, "", `${url.pathname}${url.search}${url.hash}`);
+        }}
+      />
       <label>
         {t.contact.message}
         <textarea name="message" required rows={4} maxLength={4000} />

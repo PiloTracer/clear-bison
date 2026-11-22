@@ -1,23 +1,28 @@
 # HANDOFF_UI
 
-**Status:** Closed · **Updated:** 2026-11-22  
+**Status:** Active · **Updated:** 2026-11-22  
 **Pick-up:** `.work.ui/plans/NEXT_UI.md`
 
 ## State
 
-Landing polished and trust copy shipped (EN/ES). Session closed under `CB-1`.
+Reference intake applied to landing. Direction `clearbison-security-saas` Approved + implemented (assurance strip, product frame, contact surface, nav→contact). Action1/Qualys deferred.
 
 ## Latest action (@ui-director)
 
 **Date:** 2026-11-22  
-**Request:** Improve UI + trust docs (NDA / privacy / LLM)  
-**Classified bucket:** `concept` + `copy`  
-**Executed:** token polish; quieter hero; option hierarchy; trust bullets EN/ES  
+**Request:** "TAKE THE UI TO THE NEXT STEP" + 6 security refs; operator: proceed & implement recommendations  
+**Classified bucket:** `reference`  
+**Executed:**
+1. `@ui-reference-intake scan` — aikido, intruder, wiz, tenable (ok)
+2. DNA for each slug
+3. `synthesize` → `directions/clearbison-security-saas.md` (Approved)
+4. Landing apply: hero assurances, product chrome frame, contact elevation, nav CTA `#contact`, reduced-motion
+5. `tsc` + `ai-chrome-lint` pass  
 **Blockers:** none  
-**Next recommended:** live visual check → `@ui-accessibility-audit`
+**Next recommended:** live visual check → optional scan Action1/Qualys → `@ui-accessibility-audit`
 
 ## Design canon
 
-- Brand-first hero; metal mark; no public prices
-- Steel + brand indigo tokens
-- Confidential-by-default + client LLM preference stated on Trust
+- Dark metal; steel/indigo — never Aikido purple / Intruder yellow / Wiz pink / Tenable chartreuse
+- No public prices; no logo walls; no free-trial framing
+- Proof via report visual + trust commitments

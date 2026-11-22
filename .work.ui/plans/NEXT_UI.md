@@ -6,12 +6,14 @@
 
 | Item | Artifact |
 |------|----------|
-| Landing + i18n + polish + trust copy | `frontend/src/` |
-| Metal PNG brand | `.work.ui/brand/metalized/`, `frontend/public/` |
+| Ref scan + DNA ×4 | `.work.ui/inputs/references/{aikido,intruder,wiz,tenable}/` |
+| Direction (Approved) | `…/directions/clearbison-security-saas.md` |
+| Landing apply | `page.tsx`, `globals.css`, `messages.ts`, `SiteNav.tsx` |
 
 ## Recommended next
 
 | P | Item |
 |---|------|
 | **0** | Live visual check on running port |
-| **1** | `@ui-accessibility-audit` |
+| **1** | Optional: scan Action1 + Qualys as accents |
+| **2** | `@ui-accessibility-audit` |

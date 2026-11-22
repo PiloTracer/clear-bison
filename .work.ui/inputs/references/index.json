@@ -1,0 +1,125 @@
+{
+  "schema": "ui-reference-index/1.0",
+  "updated_at": "2026-11-22T20:58:59+00:00",
+  "references": [
+    {
+      "slug": "aikido",
+      "requested_url": "https://www.aikido.dev",
+      "final_url": "https://www.aikido.dev/",
+      "status": "ok",
+      "fetched_at": "2026-11-22T20:58:53+00:00",
+      "title": "Aikido Security | Secure everything your devs build, ship & run.",
+      "http_status": 200,
+      "palette_size": 60,
+      "classification": {
+        "taxonomy_version": "2026-11-05",
+        "primary_type": "saas-product",
+        "types": [
+          "saas-product",
+          "lead-generation"
+        ],
+        "conversion_goal": "free-trial",
+        "secondary_goals": [
+          "demo-booking"
+        ],
+        "funnel_stage": "decision",
+        "confidence": "medium",
+        "reasons": [
+          "lead-generation: sales CTA: book a demo",
+          "saas-product: SaaS CTA/product language: start for free, platform, software",
+          "saas-product: JSON-LD SoftwareApplication"
+        ]
+      }
+    },
+    {
+      "slug": "intruder",
+      "requested_url": "https://www.intruder.io",
+      "final_url": "https://www.intruder.io/",
+      "status": "ok",
+      "fetched_at": "2026-11-22T20:58:55+00:00",
+      "title": "Intruder | Stop Breaches Before They Start",
+      "http_status": 200,
+      "palette_size": 55,
+      "classification": {
+        "taxonomy_version": "2026-11-05",
+        "primary_type": "saas-product",
+        "types": [
+          "saas-product",
+          "lead-generation"
+        ],
+        "conversion_goal": "free-trial",
+        "secondary_goals": [
+          "demo-booking"
+        ],
+        "funnel_stage": "decision",
+        "confidence": "medium",
+        "reasons": [
+          "lead-generation: sales CTA: book a demo",
+          "saas-product: SaaS CTA/product language: free trial, try for free, start for free"
+        ]
+      }
+    },
+    {
+      "slug": "tenable",
+      "requested_url": "https://www.tenable.com/products/vulnerability-management",
+      "final_url": "https://www.tenable.com/products/vulnerability-management",
+      "status": "ok",
+      "fetched_at": "2026-11-22T20:58:59+00:00",
+      "title": "Tenable One Vulnerability Management | Tenable\u00ae",
+      "http_status": 200,
+      "palette_size": 40,
+      "classification": {
+        "taxonomy_version": "2026-11-05",
+        "primary_type": "ecommerce",
+        "types": [
+          "ecommerce",
+          "comparison-marketplace",
+          "saas-product"
+        ],
+        "conversion_goal": "purchase",
+        "secondary_goals": [
+          "free-trial"
+        ],
+        "funnel_stage": "decision",
+        "confidence": "medium",
+        "reasons": [
+          "saas-product: SaaS CTA/product language: try for free, platform, software",
+          "saas-product: platform + product",
+          "ecommerce: JSON-LD Product + purchase context",
+          "comparison-marketplace: comparison language: reviews"
+        ]
+      }
+    },
+    {
+      "slug": "wiz",
+      "requested_url": "https://www.wiz.io",
+      "final_url": "https://www.wiz.io/",
+      "status": "ok",
+      "fetched_at": "2026-11-22T20:58:57+00:00",
+      "title": "Wiz: AI Cybersecurity for All Your Cloud and AI Applications",
+      "http_status": 200,
+      "palette_size": 72,
+      "classification": {
+        "taxonomy_version": "2026-11-05",
+        "primary_type": "comparison-marketplace",
+        "types": [
+          "comparison-marketplace",
+          "lead-generation",
+          "saas-product"
+        ],
+        "conversion_goal": "demo-booking",
+        "secondary_goals": [
+          "application"
+        ],
+        "funnel_stage": "decision",
+        "confidence": "medium",
+        "reasons": [
+          "lead-generation: sales CTA: get a demo",
+          "lead-generation: form on a sales-CTA page",
+          "saas-product: SaaS CTA/product language: pricing, platform",
+          "comparison-marketplace: comparison language: reviews"
+        ]
+      }
+    }
+  ]
+}

@@ -23,6 +23,13 @@ export type Messages = {
     lead: string;
     ctaOptions: string;
     ctaTalk: string;
+    assurances: { label: string; href: string }[];
+  };
+  proof: { label: string; body: string }[];
+  steps: {
+    kicker: string;
+    title: string;
+    items: { title: string; body: string }[];
   };
   product: {
     kicker: string;
@@ -51,6 +58,7 @@ export type Messages = {
     title: string;
     lead: string;
     requestQuote: string;
+    startHere: string;
     generalCta: string;
     generalHint: string;
     note: string;
@@ -118,6 +126,35 @@ export const messages: Record<Locale, Messages> = {
       lead: "I built ClearBison for code and sites you already control. It runs where you authorize it, writes a report you can work from, and never pretends a clean pass means the system is safe forever. When you want a person on the delivery, that person is me.",
       ctaOptions: "See the options",
       ctaTalk: "Start a founding engagement",
+      assurances: [
+        { label: "Authorized targets only", href: "#trust" },
+        { label: "Confidential by default", href: "#trust" },
+        { label: "A person on the delivery", href: "#trust" },
+      ],
+    },
+    proof: [
+      { label: "Scoped", body: "One repository or one hostname. Not a credit pack." },
+      { label: "Quoted", body: "The number arrives in writing after a short call." },
+      { label: "Patchable", body: "File, line, and a next step — not a severity dump." },
+      { label: "Private", body: "Your code and findings stay inside the job." },
+    ],
+    steps: {
+      kicker: "Path",
+      title: "Three moves. Then a report you can use.",
+      items: [
+        {
+          title: "Name the target",
+          body: "A repository or a hostname you control. I confirm the boundary before anything runs.",
+        },
+        {
+          title: "I run the option",
+          body: "Local passes, or a non-destructive model pass when that is what you bought.",
+        },
+        {
+          title: "You get the work",
+          body: "A report you can patch from. A fix branch only when that option includes it.",
+        },
+      ],
     },
     product: {
       kicker: "Product",
@@ -159,6 +196,7 @@ export const messages: Record<Locale, Messages> = {
       title: "Four options. One written quote.",
       lead: "There are no dollar amounts on this site. I quote after I understand the scope, then confirm it in writing. Here is what each option covers.",
       requestQuote: "Request a scoped quote",
+      startHere: "Most teams start here",
       generalCta: "Something else? Write me generally",
       generalHint:
         "If you are not sure which option fits, describe the system and I will size it with you.",
@@ -307,6 +345,35 @@ export const messages: Record<Locale, Messages> = {
       lead: "Construí ClearBison para código y sitios que ya controlas. Corre donde tú lo autorizas, escribe un reporte del que puedes trabajar, y nunca pretende que un pase limpio signifique que el sistema es seguro para siempre. Cuando quieres a una persona en la entrega, esa persona soy yo.",
       ctaOptions: "Ver las opciones",
       ctaTalk: "Abrir una plaza fundacional",
+      assurances: [
+        { label: "Solo objetivos autorizados", href: "#trust" },
+        { label: "Confidencial por defecto", href: "#trust" },
+        { label: "Una persona en la entrega", href: "#trust" },
+      ],
+    },
+    proof: [
+      { label: "Acotado", body: "Un repositorio o un hostname. No un paquete de créditos." },
+      { label: "Cotizado", body: "El número llega por escrito después de una llamada corta." },
+      { label: "Parcheable", body: "Archivo, línea y un siguiente paso — no un volcado de severidad." },
+      { label: "Privado", body: "Tu código y tus hallazgos se quedan dentro del trabajo." },
+    ],
+    steps: {
+      kicker: "Camino",
+      title: "Tres movimientos. Luego un reporte que puedes usar.",
+      items: [
+        {
+          title: "Nombra el objetivo",
+          body: "Un repositorio o un hostname que controlas. Confirmo el límite antes de que corra nada.",
+        },
+        {
+          title: "Ejecuto la opción",
+          body: "Pases locales, o un pase no destructivo con modelo cuando eso es lo que compraste.",
+        },
+        {
+          title: "Recibes el trabajo",
+          body: "Un reporte del que puedes parchear. Una rama de corrección solo si la opción la incluye.",
+        },
+      ],
     },
     product: {
       kicker: "Producto",
@@ -348,6 +415,7 @@ export const messages: Record<Locale, Messages> = {
       title: "Cuatro opciones. Una cotización por escrito.",
       lead: "En este sitio no hay montos en dólares. Cotizo cuando entiendo el alcance y lo confirmo por escrito. Esto es lo que cubre cada opción.",
       requestQuote: "Pedir una cotización acotada",
+      startHere: "La mayoría empieza aquí",
       generalCta: "¿Otra cosa? Escríbeme en general",
       generalHint:
         "Si no sabes qué opción encaja, describe el sistema y lo dimensionamos juntos.",

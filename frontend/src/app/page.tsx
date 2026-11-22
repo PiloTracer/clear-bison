@@ -14,68 +14,102 @@ export default function HomePage() {
           <img src="/hero-atmosphere.jpg" alt="" />
         </div>
         <div className="hero__veil" aria-hidden="true" />
-        <div className="shell hero__content">
-          <img
-            className="hero__mark"
-            src="/mark-metal.png"
-            alt="ClearBison"
-            width={148}
-            height={148}
-          />
-          <p className="hero__reliance">{t.hero.reliance}</p>
-          <h1 id="hero-title">
-            {t.hero.titleBefore}
-            <em>{t.hero.titleEm}</em>
-            {t.hero.titleAfter}
-          </h1>
-          <p className="hero__lead">{t.hero.lead}</p>
-          <div className="btn-row">
-            <a className="btn btn-primary" href="#founding">
-              {t.hero.ctaTalk}
-            </a>
-            <a className="btn btn-ghost" href="#options">
-              {t.hero.ctaOptions}
-            </a>
-          </div>
-        </div>
-      </section>
-
-      <section id="product" aria-labelledby="product-title">
-        <div className="shell">
-          <div className="product-split">
-            <div className="product-split__copy">
-              <span className="section-kicker">{t.product.kicker}</span>
-              <h2 className="section-title" id="product-title">
-                {t.product.title}
-              </h2>
-              <p className="section-lead">{t.product.lead}</p>
-              <div className="feature-grid feature-grid--stacked">
-                <article className="feature">
-                  <span className="feature__index">01</span>
-                  <h3>{t.product.f1Title}</h3>
-                  <p>{t.product.f1Body}</p>
-                </article>
-                <article className="feature">
-                  <span className="feature__index">02</span>
-                  <h3>{t.product.f2Title}</h3>
-                  <p>{t.product.f2Body}</p>
-                </article>
-                <article className="feature">
-                  <span className="feature__index">03</span>
-                  <h3>{t.product.f3Title}</h3>
-                  <p>{t.product.f3Body}</p>
-                </article>
-              </div>
+        <div className="shell hero__grid">
+          <div className="hero__copy">
+            <p className="hero__reliance">{t.hero.reliance}</p>
+            <h1 id="hero-title">
+              {t.hero.titleBefore}
+              <em>{t.hero.titleEm}</em>
+              {t.hero.titleAfter}
+            </h1>
+            <p className="hero__lead">{t.hero.lead}</p>
+            <div className="btn-row">
+              <a className="btn btn-primary" href="#contact">
+                {t.hero.ctaTalk}
+              </a>
+              <a className="btn btn-ghost" href="#options">
+                {t.hero.ctaOptions}
+              </a>
             </div>
-            <figure className="product-visual">
+            <ul className="hero__assurances">
+              {t.hero.assurances.map((item) => (
+                <li key={item.label}>
+                  <a href={item.href}>{item.label}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <figure className="hero__stage">
+            <div className="product-visual__frame">
+              <div className="product-visual__chrome" aria-hidden="true">
+                <span />
+                <span />
+                <span />
+              </div>
               <img
                 src="/report-preview.jpg"
                 alt={t.product.visualAlt}
                 width={960}
                 height={720}
               />
-              <figcaption>{t.product.visualCaption}</figcaption>
-            </figure>
+            </div>
+            <figcaption>{t.product.visualCaption}</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section className="proof" aria-label="Offer">
+        <div className="shell proof__grid">
+          {t.proof.map((item) => (
+            <article key={item.label}>
+              <strong>{item.label}</strong>
+              <p>{item.body}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section id="path" aria-labelledby="path-title">
+        <div className="shell">
+          <span className="section-kicker">{t.steps.kicker}</span>
+          <h2 className="section-title" id="path-title">
+            {t.steps.title}
+          </h2>
+          <ol className="steps">
+            {t.steps.items.map((step, index) => (
+              <li key={step.title}>
+                <span className="steps__n">0{index + 1}</span>
+                <h3>{step.title}</h3>
+                <p>{step.body}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      <section id="product" aria-labelledby="product-title">
+        <div className="shell">
+          <span className="section-kicker">{t.product.kicker}</span>
+          <h2 className="section-title" id="product-title">
+            {t.product.title}
+          </h2>
+          <p className="section-lead">{t.product.lead}</p>
+          <div className="feature-grid">
+            <article className="feature">
+              <span className="feature__index">01</span>
+              <h3>{t.product.f1Title}</h3>
+              <p>{t.product.f1Body}</p>
+            </article>
+            <article className="feature">
+              <span className="feature__index">02</span>
+              <h3>{t.product.f2Title}</h3>
+              <p>{t.product.f2Body}</p>
+            </article>
+            <article className="feature">
+              <span className="feature__index">03</span>
+              <h3>{t.product.f3Title}</h3>
+              <p>{t.product.f3Body}</p>
+            </article>
           </div>
         </div>
       </section>
@@ -118,13 +152,16 @@ export default function HomePage() {
           <div className="options">
             {OPTION_IDS.map((id) => {
               const opt = t.options.items[id];
-              const featured = id === "repo-scan" || id === "domain-scan";
+              const featured = id === "repo-scan";
               return (
                 <article
                   key={id}
                   className={`option${featured ? " option--featured" : ""}`}
                   id={id}
                 >
+                  {featured ? (
+                    <span className="option__start">{t.options.startHere}</span>
+                  ) : null}
                   <span className="option__tag">{opt.tag}</span>
                   <h3>{opt.title}</h3>
                   <p className="option__blurb">{opt.blurb}</p>
