@@ -1,8 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { LanguageSwitch } from "@/components/LanguageSwitch";
+import { useLocale } from "@/i18n/LocaleProvider";
 
 export function SiteNav() {
+  const { t } = useLocale();
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -16,7 +19,7 @@ export function SiteNav() {
     <header className={`site-nav${scrolled ? " is-scrolled" : ""}`}>
       <div className="shell site-nav__inner">
         <a className="brand-link" href="#top" aria-label="ClearBison home">
-          <img src="/mark-metal.jpg" alt="" width={36} height={36} />
+          <img src="/mark-metal.png" alt="" width={36} height={36} />
           <span>
             <span className="clear">Clear</span>
             <span className="bison">Bison</span>
@@ -25,24 +28,33 @@ export function SiteNav() {
         <nav aria-label="Primary">
           <ul className="nav-links">
             <li>
-              <a href="#product">Product</a>
+              <a href="#product">{t.nav.product}</a>
             </li>
             <li>
-              <a href="#difference">Difference</a>
+              <a href="#difference">{t.nav.difference}</a>
             </li>
             <li>
-              <a href="#options">Options</a>
+              <a href="#options">{t.nav.options}</a>
             </li>
             <li>
-              <a href="#trust">Trust</a>
+              <a href="#trust">{t.nav.trust}</a>
             </li>
             <li>
-              <a className="btn btn-primary" href="#contact">
-                Talk to the founder
+              <a href="#founding">{t.founding.kicker}</a>
+            </li>
+            <li>
+              <LanguageSwitch />
+            </li>
+            <li>
+              <a className="btn btn-primary" href="#founding">
+                {t.nav.talk}
               </a>
             </li>
           </ul>
         </nav>
+        <div className="site-nav__mobile-lang">
+          <LanguageSwitch />
+        </div>
       </div>
     </header>
   );

@@ -1,33 +1,19 @@
-# NEXT - planning backlog
+# NEXT — backlog
 
 **Updated:** 2026-11-22
 
----
-
 ## Done
 
-| Item | Artifact |
-|------|----------|
-| Agent OS + UI thin bootstrap | `.work/`, `.work.ui/`, `.cursorrules` |
-| Metalized brand | `.work.ui/brand/metalized/` |
-| Landing + API + docker stack | `frontend/`, `backend/`, `bin/start.sh`, compose + root `.env*` |
-| Pricing posture (no public USD) | site copy + HANDOFF |
-
----
-
-## Blocked on owner
-
-| # | Item | Notes |
-|---|------|-------|
-| 1 | Confirm `hello@clearbison.com` / calendar URL | Contact CTA |
-| 2 | Counsel U7 before taking payment | CLEARBISON_QUOTE sale rule |
-
----
+| Item | Where |
+|------|-------|
+| Landing + API + compose | `frontend/`, `backend/`, `bin/start.sh` |
+| SMTP + i18n + polish + trust copy | committed (`CB-1`) |
 
 ## Recommended next
 
-| Priority | Item | Notes |
-|----------|------|-------|
-| **0** | `./bin/start.sh prd setup && ./bin/start.sh prd up` | Prod mirror smoke |
-| **1** | Wire contact → CRM/email | backend intake is stub |
-| **2** | `@plan-foundation greenfield` | Formal SPECs when needed |
+| P | Item |
+|---|------|
+| **0** | Owner: fill SMTP + contact inbox in `.env.*` |
+| **1** | `@ui-accessibility-audit` / live visual check |
+| **2** | `./bin/start.sh prd setup && ./bin/start.sh prd up` smoke |
+| **3** | Wire CRM/calendar when owner confirms |

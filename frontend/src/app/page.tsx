@@ -1,61 +1,12 @@
-import { ContactForm } from "@/components/ContactForm";
+"use client";
 
-const OPTIONS = [
-  {
-    id: "package",
-    tag: "Option A · Self-run",
-    title: "Package & session",
-    blurb:
-      "You keep the scanner. We get the three local passes running on your Linux machine in one working session.",
-    points: [
-      <><strong>Includes:</strong> Linux package, setup session, safe / code / misconfig passes.</>,
-      <><strong>You run</strong> later scans and read the reports yourself.</>,
-      <><strong>Outside:</strong> Mac/Windows, website targets, us interpreting the report after the session.</>,
-    ],
-    featured: false,
-  },
-  {
-    id: "repo-scan",
-    tag: "Option B · Repo scan",
-    title: "We scan one repository",
-    blurb:
-      "You send one repo. We run the scans — including one non-destructive model-directed pass — and hand you the reports.",
-    points: [
-      <><strong>Includes:</strong> operated scans, report delivery, deletion of your copy with confirmation.</>,
-      <><strong>You fix</strong> the code. We do not change it in this option.</>,
-      <><strong>Outside:</strong> a second repository, a live website, “prove every line is exploitable.”</>,
-    ],
-    featured: true,
-  },
-  {
-    id: "domain-scan",
-    tag: "Option D · Domain scan",
-    title: "We scan one hostname",
-    blurb:
-      "You prove you own the domain. We run the URL programs and deliver every report those runs write — non-destructive.",
-    points: [
-      <><strong>Includes:</strong> ownership-gated URL scans and full report set for that hostname.</>,
-      <><strong>You supply</strong> only the ownership proof — not your source tree.</>,
-      <><strong>Outside:</strong> source changes, a second hostname, a “certificate of safety.”</>,
-    ],
-    featured: true,
-  },
-  {
-    id: "scan-fix",
-    tag: "Option C · Scan + fix",
-    title: "Scan, fix what fits, verify",
-    blurb:
-      "Same scans as Option B, then up to two days of local changes from the report — largest first — with verification re-runs.",
-    points: [
-      <><strong>Includes:</strong> scans, focused remediation branch, list of what we did not touch.</>,
-      <><strong>Verification</strong> re-runs the same three local passes.</>,
-      <><strong>Outside:</strong> redesigns, new auth systems, dependency migrations, a second repo.</>,
-    ],
-    featured: false,
-  },
-] as const;
+import { ContactForm } from "@/components/ContactForm";
+import { useLocale } from "@/i18n/LocaleProvider";
+import { OPTION_IDS } from "@/i18n/messages";
 
 export default function HomePage() {
+  const { t } = useLocale();
+
   return (
     <main>
       <section className="hero" aria-labelledby="hero-title">
@@ -66,25 +17,24 @@ export default function HomePage() {
         <div className="shell hero__content">
           <img
             className="hero__mark"
-            src="/mark-metal.jpg"
+            src="/mark-metal.png"
             alt="ClearBison"
             width={148}
             height={148}
           />
+          <p className="hero__reliance">{t.hero.reliance}</p>
           <h1 id="hero-title">
-            Security findings you can <em>patch</em> — not a wall of noise.
+            {t.hero.titleBefore}
+            <em>{t.hero.titleEm}</em>
+            {t.hero.titleAfter}
           </h1>
-          <p className="hero__lead">
-            ClearBison is AI security scanning for code and sites you control.
-            Authorized runs. Actionable reports. Founder-led delivery when you
-            want a human who owns the outcome.
-          </p>
+          <p className="hero__lead">{t.hero.lead}</p>
           <div className="btn-row">
-            <a className="btn btn-primary" href="#options">
-              See engagement options
+            <a className="btn btn-primary" href="#founding">
+              {t.hero.ctaTalk}
             </a>
-            <a className="btn btn-ghost" href="#contact">
-              Talk to the founder
+            <a className="btn btn-ghost" href="#options">
+              {t.hero.ctaOptions}
             </a>
           </div>
         </div>
@@ -92,76 +42,66 @@ export default function HomePage() {
 
       <section id="product" aria-labelledby="product-title">
         <div className="shell">
-          <span className="section-kicker">Product</span>
-          <h2 className="section-title" id="product-title">
-            Built to detect risk and help you improve it.
-          </h2>
-          <p className="section-lead">
-            ClearBison is the product name for our Security OS scanner. It
-            inspects repositories and authorized hostnames, writes reports, and
-            stops short of pretending your system is “certified safe.” The goal
-            is a measurable step forward — risks found, risks patched.
-          </p>
-          <div className="feature-grid">
-            <article className="feature">
-              <span className="feature__index">01</span>
-              <h3>Local code, no model required</h3>
-              <p>
-                Safe secrets, code-rule, and misconfiguration passes run on a
-                directory you own — without calling a model and without changing
-                your files.
-              </p>
-            </article>
-            <article className="feature">
-              <span className="feature__index">02</span>
-              <h3>Authorized targets only</h3>
-              <p>
-                Non-loopback URLs require ownership proof before active testing.
-                Legal and ethical use is enforced in the tool, not just the
-                marketing copy.
-              </p>
-            </article>
-            <article className="feature">
-              <span className="feature__index">03</span>
-              <h3>Agentic depth when you need it</h3>
-              <p>
-                Optional non-destructive model-directed runs go beyond pattern
-                matching — for teams that want reasoning, not another SAST
-                dump.
-              </p>
-            </article>
+          <div className="product-split">
+            <div className="product-split__copy">
+              <span className="section-kicker">{t.product.kicker}</span>
+              <h2 className="section-title" id="product-title">
+                {t.product.title}
+              </h2>
+              <p className="section-lead">{t.product.lead}</p>
+              <div className="feature-grid feature-grid--stacked">
+                <article className="feature">
+                  <span className="feature__index">01</span>
+                  <h3>{t.product.f1Title}</h3>
+                  <p>{t.product.f1Body}</p>
+                </article>
+                <article className="feature">
+                  <span className="feature__index">02</span>
+                  <h3>{t.product.f2Title}</h3>
+                  <p>{t.product.f2Body}</p>
+                </article>
+                <article className="feature">
+                  <span className="feature__index">03</span>
+                  <h3>{t.product.f3Title}</h3>
+                  <p>{t.product.f3Body}</p>
+                </article>
+              </div>
+            </div>
+            <figure className="product-visual">
+              <img
+                src="/report-preview.jpg"
+                alt={t.product.visualAlt}
+                width={960}
+                height={720}
+              />
+              <figcaption>{t.product.visualCaption}</figcaption>
+            </figure>
           </div>
         </div>
       </section>
 
       <section id="difference" className="band" aria-labelledby="diff-title">
         <div className="shell">
-          <span className="section-kicker">Difference</span>
+          <span className="section-kicker">{t.difference.kicker}</span>
           <h2 className="section-title" id="diff-title">
-            Not another faceless scanner dashboard.
+            {t.difference.title}
           </h2>
-          <p className="section-lead">
-            Commodity platforms sell seats and credit packs. ClearBison sells
-            outcomes with a person who will get on a call, size the work, and
-            stand behind the report.
-          </p>
+          <p className="section-lead">{t.difference.lead}</p>
           <div className="compare">
             <div className="compare-col">
-              <h3>Typical SaaS scanners</h3>
+              <h3>{t.difference.themTitle}</h3>
               <ul>
-                <li>Self-serve login, credit meters, generic severity noise</li>
-                <li>You interpret thousands of findings alone</li>
-                <li>Support queues when the report does not match reality</li>
-                <li>Published rate cards that become negotiation ceilings</li>
+                {t.difference.them.map((line) => (
+                  <li key={line}>{line}</li>
+                ))}
               </ul>
             </div>
             <div className="compare-col is-ours">
-              <h3>ClearBison</h3>
+              <h3>{t.difference.usTitle}</h3>
               <ul>
-                <li>Scoped engagements sized to one repo or one hostname</li>
-                <li>Reports you can patch against — with optional fix branch</li>
-                <li>Direct access to the founder for scoping and trust</li>
-                <li>Quotes in writing after a short call — never a cold price list</li>
+                {t.difference.us.map((line) => (
+                  <li key={line}>{line}</li>
+                ))}
               </ul>
             </div>
           </div>
@@ -170,93 +110,103 @@ export default function HomePage() {
 
       <section id="options" aria-labelledby="options-title">
         <div className="shell">
-          <span className="section-kicker">Options</span>
+          <span className="section-kicker">{t.options.kicker}</span>
           <h2 className="section-title" id="options-title">
-            Four ways to engage. One honest quote.
+            {t.options.title}
           </h2>
-          <p className="section-lead">
-            We do not publish dollar amounts on this site. Every engagement is
-            quoted after we understand scope — then confirmed in writing. Here
-            is what each option covers.
-          </p>
+          <p className="section-lead">{t.options.lead}</p>
           <div className="options">
-            {OPTIONS.map((opt) => (
-              <article
-                key={opt.id}
-                className={`option${opt.featured ? " option--featured" : ""}`}
-                id={opt.id}
-              >
-                <span className="option__tag">{opt.tag}</span>
-                <h3>{opt.title}</h3>
-                <p className="option__blurb">{opt.blurb}</p>
-                <ul>
-                  {opt.points.map((point, i) => (
-                    <li key={i}>{point}</li>
-                  ))}
-                </ul>
-                <a className="btn btn-primary" href="#contact">
-                  Request a scoped quote
-                </a>
-              </article>
-            ))}
+            {OPTION_IDS.map((id) => {
+              const opt = t.options.items[id];
+              const featured = id === "repo-scan" || id === "domain-scan";
+              return (
+                <article
+                  key={id}
+                  className={`option${featured ? " option--featured" : ""}`}
+                  id={id}
+                >
+                  <span className="option__tag">{opt.tag}</span>
+                  <h3>{opt.title}</h3>
+                  <p className="option__blurb">{opt.blurb}</p>
+                  <ul>
+                    {opt.points.map((point) => (
+                      <li key={point}>{point}</li>
+                    ))}
+                  </ul>
+                  <a
+                    className={`btn ${featured ? "btn-primary" : "btn-ghost"}`}
+                    href={`/?option=${id}#contact`}
+                  >
+                    {t.options.requestQuote}
+                  </a>
+                </article>
+              );
+            })}
           </div>
-          <p className="price-note">
-            Mac and Windows packages exist but stay outside Option A until a
-            scan has been proven on those machines. No monitoring SLA. No
-            24/7. No claim that a clean report means the system cannot be
-            breached.
-          </p>
+
+          <a className="btn btn-wide" href="/#contact">
+            <span className="btn-wide__label">{t.options.generalCta}</span>
+            <span className="btn-wide__hint">{t.options.generalHint}</span>
+          </a>
+
+          <p className="price-note">{t.options.note}</p>
         </div>
       </section>
 
       <section id="trust" className="band" aria-labelledby="trust-title">
         <div className="shell trust">
           <div>
-            <span className="section-kicker">Trust</span>
+            <span className="section-kicker">{t.trust.kicker}</span>
             <h2 className="section-title" id="trust-title">
-              You get the founder — not a ticket queue.
+              {t.trust.title}
             </h2>
             <ul className="trust-points">
-              <li>
-                <strong>Direct CEO contact</strong>
-                Scoping calls, quote walkthroughs, and delivery questions go to
-                the person who ships the work.
-              </li>
-              <li>
-                <strong>Authorized use, written down</strong>
-                We only scan systems you own or are explicitly allowed to test.
-                Ownership proof gates non-local targets.
-              </li>
-              <li>
-                <strong>Honest boundaries</strong>
-                Findings help you improve. They are not a certificate of safety
-                and not proof a breach did — or did not — already happen.
-              </li>
+              {t.trust.points.map((p) => (
+                <li key={p.title}>
+                  <strong>{p.title}</strong>
+                  {p.body}
+                </li>
+              ))}
             </ul>
           </div>
           <aside className="trust__panel">
-            <h3>How a quote is made</h3>
-            <p>
-              Short call. We size the option (A / B / C / D), confirm access,
-              and send a written proposal. Diagnostics stay paid. Builds and
-              fixes are quoted separately when they leave the option boundary.
-            </p>
+            <h3>{t.trust.panelTitle}</h3>
+            <p>{t.trust.panelBody}</p>
             <a className="btn btn-ghost" href="#contact">
-              Book the scoping call
+              {t.trust.panelCta}
             </a>
           </aside>
         </div>
       </section>
 
+      <section id="founding" className="founding" aria-labelledby="founding-title">
+        <div className="founding__bg" aria-hidden="true">
+          <img src="/cta-band.jpg" alt="" />
+        </div>
+        <div className="founding__veil" aria-hidden="true" />
+        <div className="shell founding__content">
+          <span className="section-kicker">{t.founding.kicker}</span>
+          <h2 className="section-title" id="founding-title">
+            {t.founding.title}
+          </h2>
+          <p className="founding__lead">{t.founding.lead}</p>
+          <ul className="founding__points">
+            {t.founding.points.map((line) => (
+              <li key={line}>{line}</li>
+            ))}
+          </ul>
+          <a className="btn btn-primary" href="#contact">
+            {t.founding.cta}
+          </a>
+        </div>
+      </section>
+
       <section id="contact" aria-labelledby="contact-title">
         <div className="shell">
-          <div className="contact-box" style={{ gridTemplateColumns: "1fr" }}>
+          <div className="contact-box">
             <div>
-              <h2 id="contact-title">Ready when you are.</h2>
-              <p>
-                Tell us which option fits — or describe the system. We reply
-                with a time for a short scoping call with the founder.
-              </p>
+              <h2 id="contact-title">{t.contact.title}</h2>
+              <p>{t.contact.lead}</p>
             </div>
             <ContactForm />
           </div>
@@ -267,21 +217,24 @@ export default function HomePage() {
         <div className="shell">
           <div className="site-footer__inner">
             <div>
-              <strong style={{ color: "var(--ink)" }}>ClearBison</strong>
-              <span> · Product of LogicBison</span>
+              <strong className="site-footer__brand">ClearBison</strong>
+              <span>
+                {" "}
+                · {t.footer.productOf}{" "}
+                <a
+                  href="https://logicbison.com"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  {t.footer.brand}
+                </a>
+              </span>
             </div>
             <div>
-              <a href="mailto:hello@clearbison.com">hello@clearbison.com</a>
-              {" · "}
-              <a href="#top">Back to top</a>
+              <a href="#top">{t.footer.backTop}</a>
             </div>
           </div>
-          <p className="legal-line">
-            ClearBison tools are for legal and ethical use only — on your own
-            applications, or on systems you are explicitly authorized to test.
-            Reports detect and describe risk so it can be patched; they do not
-            certify that a system is safe.
-          </p>
+          <p className="legal-line">{t.footer.legal}</p>
         </div>
       </footer>
     </main>

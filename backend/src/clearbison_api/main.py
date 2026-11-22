@@ -1,15 +1,25 @@
+import logging
+import smtplib
+from email.message import EmailMessage
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 from pydantic import BaseModel, EmailStr, Field
 
 from clearbison_api import __version__
 from clearbison_api.settings import settings
 
+logger = logging.getLogger("clearbison_api")
+
+_is_dev = settings.app_env == "dev"
+
 app = FastAPI(
     title="ClearBison API",
     version=__version__,
-    docs_url="/docs" if settings.app_env == "dev" else None,
+    docs_url="/docs" if _is_dev else None,
     redoc_url=None,
+    openapi_url="/openapi.json" if _is_dev else None,
 )
 
 origins = [o.strip() for o in settings.cors_origins.split(",") if o.strip()]
@@ -42,7 +52,6 @@ class ContactRequest(BaseModel):
 
 class ContactResponse(BaseModel):
     ok: bool
-    inbox: str
     detail: str
 
 
@@ -56,16 +65,71 @@ def health() -> HealthResponse:
     )
 
 
+def _send_contact_email(body: ContactRequest) -> None:
+    option_line = body.option.strip() or "(general)"
+    content = (
+        f"Name: {body.name}\n"
+        f"Email: {body.email}\n"
+        f"Option: {option_line}\n"
+        f"\n"
+        f"Message:\n"
+        f"{body.message.strip()}\n"
+    )
+
+    msg = EmailMessage()
+    msg.set_content(content)
+    msg["Subject"] = f"ClearBison contact: {body.name}"
+    msg["From"] = settings.smtp_user
+    msg["To"] = settings.contact_inbox
+    msg["Reply-To"] = body.email
+
+    if settings.smtp_port == 465:
+        with smtplib.SMTP_SSL(settings.smtp_host, settings.smtp_port) as server:
+            server.login(settings.smtp_user, settings.smtp_pass)
+            server.send_message(msg)
+    else:
+        with smtplib.SMTP(settings.smtp_host, settings.smtp_port) as server:
+            server.starttls()
+            server.login(settings.smtp_user, settings.smtp_pass)
+            server.send_message(msg)
+
+
 @app.post("/api/contact", response_model=ContactResponse)
-def contact(body: ContactRequest) -> ContactResponse:
-    # Intake only — delivery is email/CRM outside this process for v0.
-    # Logs stay free of PII beyond option id.
-    _ = body
+def contact(body: ContactRequest) -> ContactResponse | JSONResponse:
+    if not settings.smtp_host or not settings.smtp_user or not settings.smtp_pass:
+        logger.warning("SMTP not configured; contact message dropped")
+        return JSONResponse(
+            status_code=503,
+            content={
+                "ok": False,
+                "detail": "The contact form is not configured yet. Try again later.",
+            },
+        )
+
+    if not settings.contact_inbox:
+        logger.warning("CONTACT_INBOX empty; contact message dropped")
+        return JSONResponse(
+            status_code=503,
+            content={
+                "ok": False,
+                "detail": "The contact form is not configured yet. Try again later.",
+            },
+        )
+
+    try:
+        _send_contact_email(body)
+    except Exception:
+        logger.exception("Failed to send contact email")
+        return JSONResponse(
+            status_code=502,
+            content={
+                "ok": False,
+                "detail": "Could not send the message. Try again in a moment.",
+            },
+        )
+
+    logger.info("Contact email sent for option=%s", body.option.strip() or "general")
     return ContactResponse(
         ok=True,
-        inbox=settings.contact_inbox,
-        detail=(
-            "Received. A founder will reply to schedule a short scoping call. "
-            f"You can also write {settings.contact_inbox} directly."
-        ),
+        detail="Received. I will reply to schedule a short scoping call.",
     )

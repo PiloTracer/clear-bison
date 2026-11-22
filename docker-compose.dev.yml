@@ -9,7 +9,11 @@ services:
     environment:
       APP_ENV: ${APP_ENV:-dev}
       PUBLIC_HOST: ${PUBLIC_HOST:-logicbison.com}
-      CONTACT_INBOX: ${CONTACT_INBOX:-hello@clearbison.com}
+      CONTACT_INBOX: ${CONTACT_INBOX:-}
+      SMTP_HOST: ${SMTP_HOST:-}
+      SMTP_PORT: ${SMTP_PORT:-465}
+      SMTP_USER: ${SMTP_USER:-}
+      SMTP_PASS: ${SMTP_PASS:-}
       CORS_ORIGINS: ${CORS_ORIGINS:-*}
     ports:
       - "${BIND_ADDRESS:-0.0.0.0}:${API_PORT}:8000"
@@ -21,7 +25,7 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile.dev
-    env_file: .env.dev
+    # No env_file: contact/SMTP secrets stay on the api service only.
     environment:
       NODE_ENV: development
       WATCHPACK_POLLING: "true"

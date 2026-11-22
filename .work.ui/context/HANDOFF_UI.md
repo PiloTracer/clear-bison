@@ -1,30 +1,23 @@
-# HANDOFF_UI — UI design session boundary
+# HANDOFF_UI
 
-**Status:** Active · **Updated:** 2026-11-22
+**Status:** Closed · **Updated:** 2026-11-22  
+**Pick-up:** `.work.ui/plans/NEXT_UI.md`
 
-## Session status
+## State
 
-**Open:** 2026-11-22 — ClearBison.com landing
-
-**UI layer state:** Implementation shipped for v0 marketing landing (single page).
-
-**Recommended pick-up:** `.work.ui/plans/NEXT_UI.md`
+Landing polished and trust copy shipped (EN/ES). Session closed under `CB-1`.
 
 ## Latest action (@ui-director)
 
-**Date:** 2026-11-22
-**Request:** Landing for ClearBison.com with refs Varsuite + Aikido; metalized brand; great copy.
-**Classified bucket:** ui-implementation (accelerated under unattended cross-framework)
-**Executed:**
-1. Reference DNA from Varsuite code-scanning + Aikido code-audit (hero clarity, option grids, founder CTA vs faceless SaaS)
-2. Metalized mark + lockup + hero atmosphere → `.work.ui/brand/metalized/` + `frontend/public/`
-3. Single-page landing in `frontend/src/app/page.tsx` + `globals.css` (Syne / Instrument Sans, brand indigo on black)
-**Blockers:** none for v0 ship
-**Next recommended:** `@ui-visual-verify` after stack is up; optional screen SPECs for multi-page later
+**Date:** 2026-11-22  
+**Request:** Improve UI + trust docs (NDA / privacy / LLM)  
+**Classified bucket:** `concept` + `copy`  
+**Executed:** token polish; quieter hero; option hierarchy; trust bullets EN/ES  
+**Blockers:** none  
+**Next recommended:** live visual check → `@ui-accessibility-audit`
 
-## Design decisions
+## Design canon
 
-- Full-bleed hero with metalized mark as brand-first signal
-- No published prices (business canon)
-- Four engagement options as scoped packages + founder contact
-- Avoid purple/cream AI clichés; brand blue `#5b5bff` on near-black
+- Brand-first hero; metal mark; no public prices
+- Steel + brand indigo tokens
+- Confidential-by-default + client LLM preference stated on Trust

@@ -1,19 +1,17 @@
-# NEXT_UI — UI planning backlog
+# NEXT_UI
 
-**Status:** Active · **Updated:** 2026-11-22
+**Updated:** 2026-11-22
 
-## Done (UI)
+## Done
 
 | Item | Artifact |
 |------|----------|
-| UI bootstrap | `.work.ui/` |
-| Metalized brand | `.work.ui/brand/metalized/` |
-| Landing v0 | `frontend/src/app/` |
+| Landing + i18n + polish + trust copy | `frontend/src/` |
+| Metal PNG brand | `.work.ui/brand/metalized/`, `frontend/public/` |
 
 ## Recommended next
 
-| Priority | Item | Notes |
-|----------|------|-------|
-| **0** | Visual check on live `./bin/start.sh dev up` | Browser |
-| **1** | `@ui-accessibility-audit` | After visual pass |
-| **2** | Optional multi-page SPECs | Only if product expands |
+| P | Item |
+|---|------|
+| **0** | Live visual check on running port |
+| **1** | `@ui-accessibility-audit` |
